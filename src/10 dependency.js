@@ -91,7 +91,7 @@ function fireDependencies(list) {
                        fn.handler(value, el, fn)
                     }
                 } catch (e) { 
-                    console.log(e)
+                    avalon.log(e)
                 }
             }
         }

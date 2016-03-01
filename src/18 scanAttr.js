@@ -43,7 +43,6 @@ function scanAttr(elem, vmodels, match) {
                             name: name,
                             value: newValue,
                             oneTime: oneTime,
-                            uuid: name + "-" + getUid(elem),
                             //chrome与firefox下Number(param)得到的值不一样 #855
                             priority: (priorityMap[type] || type.charCodeAt(0) * 10) + (Number(param.replace(/\D/g, "")) || 0)
                         }
@@ -122,6 +121,9 @@ if (!W3C) {
             return []
         }
         var str = html.match(rtag)[0]
+        if(str.slice(-1) === ">"){
+            str = str.slice(0,-1)
+        }
         var attributes = [],
                 match,
                 k, v
@@ -135,7 +137,6 @@ if (!W3C) {
                 v = (rquote.test(v) ? v.slice(1, -1) : v).replace(ramp, "&")
             }
             var name = k[1].toLowerCase()
-            match = name.match(rmsAttr)
             var binding = {
                 name: name,
                 specified: true,
